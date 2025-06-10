@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>厚生労働省</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "MS ゴシック", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .header {
+            background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+            border-bottom: 1px solid #ddd;
+            position: relative;
+        }
+        
+        .header-top {
+            background-color: #f8f9fa;
+            padding: 5px 0;
+            font-size: 12px;
+            text-align: right;
+        }
+        
+        .header-top-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-top a {
+            color: #666;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+        
+        .header-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-emblem {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #0066cc, #004499);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .logo-text {
+            font-size: 28px;
+            font-weight: bold;
+            color: #003366;
+            letter-spacing: 1px;
+        }
+        
+        .logo-subtitle {
+            font-size: 11px;
+            color: #666;
+            margin-top: 2px;
+            letter-spacing: 0.5px;
+        }
+        
+        .header-search {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .search-box {
+            display: flex;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .search-input {
+            padding: 8px 15px;
+            border: none;
+            outline: none;
+            width: 200px;
+            font-size: 14px;
+        }
+        
+        .search-btn {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .nav-bar {
+            background: linear-gradient(to bottom, #0066cc, #004499);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 0;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 15px 20px;
+            border-right: 1px solid rgba(255,255,255,0.2);
+            transition: background-color 0.3s;
+            cursor: default;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .breadcrumb {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            font-size: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .breadcrumb-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+        }
+        
+        .content-left {
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .page-title {
+            background: linear-gradient(to right, #0066cc, #0080ff);
+            color: white;
+            padding: 20px 30px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .content-body {
+            padding: 30px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #003366;
+            border-left: 4px solid #0066cc;
+            padding-left: 15px;
+        }
+        
+        .news-list {
+            border-top: 1px solid #eee;
+        }
+        
+        .news-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .news-date {
+            background-color: #f0f6ff;
+            color: #0066cc;
+            padding: 6px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+            min-width: 90px;
+            text-align: center;
+        }
+        
+        .news-content {
+            flex: 1;
+        }
+        
+        .news-category {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            margin-right: 8px;
+            font-weight: bold;
+        }
+        
+        .news-title {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .news-title.clickable {
+            color: #0066cc;
+            cursor: pointer;
+        }
+        
+        .news-title.clickable:hover {
+            text-decoration: underline;
+        }
+        
+        .news-title:not(.clickable) {
+            cursor: default;
+        }
+        
+        .content-right {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .sidebar-box {
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .sidebar-title {
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            padding: 12px 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .sidebar-content {
+            padding: 15px;
+        }
+        
+        .link-list {
+            list-style: none;
+        }
+        
+        .link-list li {
+            margin-bottom: 8px;
+            padding-left: 12px;
+            position: relative;
+        }
+        
+        .link-list li:before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: #0066cc;
+            font-size: 10px;
+        }
+        
+        .link-list a {
+            color: #333;
+            text-decoration: none;
+            font-size: 13px;
+            cursor: default;
+        }
+        
+        .banner-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .banner-item {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        
+        .banner-item.blue {
+            background: linear-gradient(135deg, #0066cc, #4da6ff);
+        }
+        
+        .banner-item.green {
+            background: linear-gradient(135deg, #28a745, #5cb85c);
+        }
+        
+        .footer {
+            background-color: #003366;
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 14px;
+            margin-bottom: 15px;
+            color: #cce6ff;
+            font-weight: bold;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-section a {
+            color: #b3d9ff;
+            text-decoration: none;
+            font-size: 12px;
+            cursor: default;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #004499;
+            font-size: 11px;
+            color: #99ccff;
+        }
+        
+        .joke-notice {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff4444;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.5s ease;
+        }
+        
+        .joke-notice.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .news-detail-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            border-bottom: 2px solid #0066cc;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #003366;
+        }
+        
+        .modal-date {
+            color: #666;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        
+        .modal-body {
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header-main {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 0;
+            }
+            
+            .nav-links a {
+                padding: 12px 15px;
+                font-size: 13px;
+            }
+            
+            .joke-notice {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-top">
+            <div class="header-top-content">
+                <a href="#">English</a>
+                <a href="#">中文</a>
+                <a href="#">한국어</a>
+                <a href="#">サイトマップ</a>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="logo-section">
+                <div class="logo-emblem">厚労</div>
+                <div>
+                    <div class="logo-text">厚生労働省</div>
+                    <div class="logo-subtitle">Ministry of Health, Labour and Welfare</div>
+                </div>
+            </div>
+            <div class="header-search">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="検索キーワードを入力">
+                    <button class="search-btn">検索</button>
+                </div>
+            </div>
+        </div>
+        <nav class="nav-bar">
+            <div class="nav-container">
+                <div class="nav-links">
+                    <a href="#">ホーム</a>
+                    <a href="#">政策について</a>
+                    <a href="#">報道・広報</a>
+                    <a href="#">統計情報・白書</a>
+                    <a href="#">申請・手続き</a>
+                    <a href="#">審議会・研究会等</a>
+                    <a href="#">所管の法人</a>
+                </div>
+            </div>
+        </nav>
+        <div class="breadcrumb">
+            <div class="breadcrumb-content">
+                <a href="#">ホーム</a> > <a href="#">報道・広報</a> > 報道発表資料
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="content-left">
+            <div class="page-title">報道発表資料</div>
+            <div class="content-body">
+                <h2 class="section-title">最新の報道発表</h2>
+                <div class="news-list">
+                    <div class="news-item">
+                        <div class="news-date">2025.06.10</div>
+                        <div class="news-content">
+                            <span class="news-category">重要</span>
+                            <div class="news-title clickable" onclick="showNewsDetail()">
+                                「むすぶ症候群」に関する新たな症例報告について ～発症者の特徴的な行動パターンを確認～
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">2025.06.09</div>
+                        <div class="news-content">
+                            <span class="news-category">医療</span>
+                            <div class="news-title">
+                                令和7年度 医療機関における安全管理体制の強化について
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">2025.06.08</div>
+                        <div class="news-content">
+                            <span class="news-category">労働</span>
+                            <div class="news-title">
+                                働き方改革関連法の施行状況に関する調査結果（令和7年3月分）
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">2025.06.07</div>
+                        <div class="news-content">
+                            <span class="news-category">福祉</span>
+                            <div class="news-title">
+                                高齢者介護施設における職員配置基準の見直しについて
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">2025.06.06</div>
+                        <div class="news-content">
+                            <span class="news-category">年金</span>
+                            <div class="news-title">
+                                令和7年度の年金制度改正に関する説明会の開催について
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">2025.06.05</div>
+                        <div class="news-content">
+                            <span class="news-category">保険</span>
+                            <div class="news-title">
+                                国民健康保険の保険料率改定に関する通知
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-right">
+            <div class="sidebar-box">
+                <div class="sidebar-title">分野別情報</div>
+                <div class="sidebar-content">
+                    <ul class="link-list">
+                        <li><a href="#">医療・保健</a></li>
+                        <li><a href="#">介護・高齢者福祉</a></li>
+                        <li><a href="#">障害者福祉</a></li>
+                        <li><a href="#">子ども・子育て支援</a></li>
+                        <li><a href="#">雇用・労働</a></li>
+                        <li><a href="#">年金・保険</a></li>
+                        <li><a href="#">食品・生活衛生</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sidebar-box">
+                <div class="sidebar-title">関連リンク</div>
+                <div class="sidebar-content">
+                    <ul class="link-list">
+                        <li><a href="#">電子申請・届出システム</a></li>
+                        <li><a href="#">各種統計調査</a></li>
+                        <li><a href="#">法令・通達検索</a></li>
+                        <li><a href="#">審議会・検討会</a></li>
+                        <li><a href="#">パブリックコメント</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sidebar-box">
+                <div class="sidebar-title">お知らせ・イベント</div>
+                <div class="sidebar-content">
+                    <div class="banner-section">
+                        <div class="banner-item">
+                            感染症対策<br>最新情報
+                        </div>
+                        <div class="banner-item blue">
+                            オンライン申請<br>システム
+                        </div>
+                        <div class="banner-item green">
+                            健康づくり<br>キャンペーン
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>厚生労働省について</h3>
+                <ul>
+                    <li><a href="#">大臣・副大臣・政務官</a></li>
+                    <li><a href="#">組織・職員</a></li>
+                    <li><a href="#">所在地・連絡先</a></li>
+                    <li><a href="#">業務案内</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>政策情報</h3>
+                <ul>
+                    <li><a href="#">白書・年次報告書</a></li>
+                    <li><a href="#">予算・決算・税制</a></li>
+                    <li><a href="#">法令・通達</a></li>
+                    <li><a href="#">審議会・検討会等</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>申請・手続き</h3>
+                <ul>
+                    <li><a href="#">電子申請</a></li>
+                    <li><a href="#">申請書ダウンロード</a></li>
+                    <li><a href="#">手続き案内</a></li>
+                    <li><a href="#">様式・リーフレット</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>その他</h3>
+                <ul>
+                    <li><a href="#">お問い合わせ</a></li>
+                    <li><a href="#">情報公開・個人情報保護</a></li>
+                    <li><a href="#">調達情報</a></li>
+                    <li><a href="#">採用情報</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; Ministry of Health, Labour and Welfare, All Rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="joke-notice" id="jokeNotice">
+        🎭 これはジョークサイトです！詳細:ttps://www.youtube.com/@mubu-abc581
+    </div>
+
+    <div class="news-detail-modal" id="newsModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <div class="modal-title">「むすぶ症候群」に関する新たな症例報告について</div>
+                <div class="modal-date">令和7年6月10日</div>
+            </div>
+            <div class="modal-body">
+                <p><strong>【概要】</strong></p>
+                <p>当省では、新たに確認された「むすぶ症候群」について、医療機関及び関係者の皆様に情報提供いたします。</p>
+                
+                <p><strong>【症状の特徴】</strong></p>
+                <p>むすぶ症候群は、発症すると以下の特徴的な症状が現れます：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>思わず「むすぶチャンネル」のファンになる</li>
+                    <li>動画を見ると笑顔になる傾向</li>
+                    <li>チャンネル登録ボタンを押したくなる衝動</li>
+                    <li>コメント欄に温かいメッセージを残したくなる</li>
+                </ul>
+                
+                <p><strong>【対応方法】</strong></p>
+                <p>現在のところ、この症候群による健康被害は報告されておりません。むしろ、日常生活における幸福感の向上が認められています。</p>
+                
+                <p><strong>【医療機関の皆様へ】</strong></p>
+                <p>類似の症状を訴える患者さんがいらっしゃいましたら、温かく見守っていただきますようお願いいたします。</p>
+                
+                <p style="margin-top: 20px; padding: 15px; background-color: #f0f6ff; border-left: 4px solid #0066cc;">
+                    <strong>※ 注意：</strong> チャンネル登録しなかったら重度のむぶ状態になります。登録押してください。＞＞https://www.youtube.com/@mubu-abc581＜＜               </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // スクロール検知でジョーク表示
+        let scrolled = false;
+        window.addEventListener('scroll', function() {
+            if (!scrolled && window.scrollY > 300) {
+                scrolled = true;
+                document.getElementById('jokeNotice').classList.add('show');
+            }
+        });
+
+        // ニュース詳細モーダルを表示
+        function showNewsDetail() {
+            document.getElementById('newsModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // モーダルを閉じる
+        function closeModal() {
+            document.getElementById('newsModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // モーダル外クリックで閉じる
+        document.getElementById('newsModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // ESCキーでモーダルを閉じる
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
